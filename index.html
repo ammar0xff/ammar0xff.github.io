@@ -342,12 +342,14 @@
       menu.classList.toggle('active');
       toggle.querySelector('i').classList.toggle('fa-bars');
       toggle.querySelector('i').classList.toggle('fa-times');
+      document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
     });
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
         menu.classList.remove('active');
         toggle.querySelector('i').classList.add('fa-bars');
         toggle.querySelector('i').classList.remove('fa-times');
+        document.body.style.overflow = '';
       });
     });
     const sections = document.querySelectorAll('section');

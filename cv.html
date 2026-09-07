@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ammar0xff | cv</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .cv-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0.9rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .cv-topbar .mono {
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+  .cv-topbar .mono .green { color: var(--green); }
+  .cv-topbar a {
+    color: var(--green);
+    font-size: 0.875rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .cv-topbar a:hover { text-shadow: 0 0 8px var(--green-glow); }
+  .cv-body {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+  #pdf-status {
+    text-align: center;
+    padding: 3rem 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  #pdf-status .green { color: var(--green); }
+  #pdf-canvas-wrap { display: none; }
+  .pdf-page {
+    position: relative;
+    background: #1a1c1a;
+    border: 1px solid var(--green-dim);
+    border-radius: var(--radius);
+    padding: 6px;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.12);
+  }
+  .pdf-page canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: calc(var(--radius) - 4px);
+  }
+  .pdf-page-file {
+    font-size: 0.625rem;
+    color: var(--muted);
+    margin-top: 6px;
+    text-align: center;
+  }
+  @media (max-width: 768px) {
+    .cv-body { padding-top: 1.5rem; }
+    .cv-topbar .hide-sm { display: none; }
+  }
+</style>
+</head>
+<body>
+  <nav class="cv-topbar">
+    <a href="index.html">&lt;&lt; back</a>
+    <span class="mono"><span class="green">cat</span> cv.pdf</span>
+    <a href="assets/CV_Ammar_Mohamed.pdf" download>[ save a copy ]</a>
+  </nav>
+
+  <div class="cv-body">
+    <div id="pdf-status"><span class="green">$</span> loading cv.pdf ...</div>
+    <div id="pdf-canvas-wrap"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    const status = document.getElementById('pdf-status');
+    const wrap = document.getElementById('pdf-canvas-wrap');
+
+    (async () => {
+      try {
+        const pdf = await pdfjsLib.getDocument({ url: 'assets/CV_Ammar_Mohamed.pdf' }).promise;
+        status.textContent = '';
+        wrap.style.display = 'block';
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const base = page.getViewport({ scale: 1 });
+          const maxW = Math.min(800, wrap.clientWidth - 40);
+          const scale = maxW / base.width;
+          const viewport = page.getViewport({ scale });
+
+          const holder = document.createElement('div');
+          holder.className = 'pdf-page';
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.floor(viewport.width);
+          canvas.height = Math.floor(viewport.height);
+          const ctx = canvas.getContext('2d');
+          await page.render({ canvasContext: ctx, viewport }).promise;
+          holder.appendChild(canvas);
+
+          const file = document.createElement('div');
+          file.className = 'pdf-page-file';
+          file.textContent = 'cv.pdf - page ' + i + '/' + pdf.numPages;
+          holder.appendChild(file);
+          wrap.appendChild(holder);
+        }
+      } catch (e) {
+        status.innerHTML =
+          '<span class="green">$</span> failed to load cv.pdf<br><small>' +
+          (e && e.message ? e.message : e) + '</small>';
+      }
+    })();
+  </script>
+</body>
+</html>

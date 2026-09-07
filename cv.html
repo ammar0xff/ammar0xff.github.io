@@ -32,7 +32,7 @@
   }
   .cv-topbar a:hover { text-shadow: 0 0 8px var(--green-glow); }
   .cv-body {
-    max-width: 820px;
+    max-width: 980px;
     margin: 0 auto;
     padding: 2rem 1.25rem 4rem;
   }
@@ -99,8 +99,9 @@
         for (let i = 1; i <= pdf.numPages; i++) {
           const page = await pdf.getPage(i);
           const base = page.getViewport({ scale: 1 });
-          const maxW = Math.min(800, wrap.clientWidth - 40);
-          const scale = maxW / base.width;
+          const dpr = Math.max(1, window.devicePixelRatio || 1);
+          const maxW = Math.min(900, wrap.clientWidth - 40);
+          const scale = (maxW * dpr) / base.width;
           const viewport = page.getViewport({ scale });
 
           const holder = document.createElement('div');

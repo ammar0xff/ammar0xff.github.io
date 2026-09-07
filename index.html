@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ammar0xff</title>
+  <meta name="description" content="ammar0xff, solo software engineer building Vendora, an Arabic-first inventory and sales ERP.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Cairo:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="wrap">
+
+    <header class="mast">
+      <p class="mast-ar" lang="ar" dir="rtl">مطوّر برمجيات، ومبنيّ Vendora</p>
+      <h1 class="mast-name">ammar0xff</h1>
+      <!-- EDIT: switch mast-role line to your own one-liner -->
+      <p class="mast-role">Solo engineer building software for shops that still run on paper. The flagship is Vendora, an Arabic-first inventory, sales and payroll ERP.</p>
+      <p class="mast-role ar" lang="ar" dir="rtl">أبني أنظمة إدارة للمحلات التي ما زالت تعمل بالدفاتر الورقية. مشروعي الرئيسي Vendora.</p>
+      <!-- EDIT: point the stamp at wherever you want the primary action to go -->
+      <a class="stamp" href="https://github.com/ammar0xff">open an issue, or just look</a>
+    </header>
+
+    <section class="ledger" aria-label="Project ledger">
+      <p class="ledger-label">projects</p>
+      <ul class="rows">
+        <li class="row">
+          <a class="row-name" href="https://github.com/ammar0xff/Vendora">Vendora</a>
+          <p class="row-desc">Inventory, sales, HR and payroll for Arabic-speaking shops. React and TypeScript frontend on a FastAPI and PostgreSQL backend, deployed on Vercel with a Neon database.</p>
+          <p class="row-meta mono">TypeScript, React, Python, FastAPI, PostgreSQL</p>
+          <p class="row-year mono">2026</p>
+          <a class="row-link mono" href="https://github.com/ammar0xff/Vendora">repo</a>
+          <a class="row-link mono" href="https://vendora-self-xi.vercel.app">live</a>
+        </li>
+        <!-- EDIT: replace this row with your next project -->
+        <li class="row">
+          <p class="row-name row-name-ghost">Your next project</p>
+          <p class="row-desc">Edit this row in index.html. Swap the name, one line about it, the stack, the year and the links.</p>
+          <p class="row-meta mono">stack goes here</p>
+          <p class="row-year mono">edit</p>
+          <a class="row-link mono" href="https://github.com/ammar0xff">repo</a>
+          <a class="row-link mono row-link-ghost" href="#">live</a>
+        </li>
+      </ul>
+    </section>
+
+    <footer class="foot">
+      <a href="https://github.com/ammar0xff">github</a>
+      <!-- EDIT: swap the noreply address for your real inbox -->
+      <a href="mailto:ammar0xff@users.noreply.github.com">email</a>
+      <span class="mono foot-year" id="year"></span>
+    </footer>
+
+  </main>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

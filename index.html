@@ -1,62 +1,370 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ammar0xff</title>
-  <meta name="description" content="ammar0xff, solo software engineer building Vendora, an Arabic-first inventory and sales ERP.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ammar Mohamed | Penetration Tester</title>
+  <meta name="description" content="Ammar Mohamed - Penetration Tester from Egypt. Bug bounty hunter, developer, and open-source contributor.">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Cairo:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main class="wrap">
 
-    <header class="mast">
-      <p class="mast-ar" lang="ar" dir="rtl">مطوّر برمجيات، ومبنيّ Vendora</p>
-      <h1 class="mast-name">ammar0xff</h1>
-      <!-- EDIT: switch mast-role line to your own one-liner -->
-      <p class="mast-role">Solo engineer building software for shops that still run on paper. The flagship is Vendora, an Arabic-first inventory, sales and payroll ERP.</p>
-      <p class="mast-role ar" lang="ar" dir="rtl">أبني أنظمة إدارة للمحلات التي ما زالت تعمل بالدفاتر الورقية. مشروعي الرئيسي Vendora.</p>
-      <!-- EDIT: point the stamp at wherever you want the primary action to go -->
-      <a class="stamp" href="https://github.com/ammar0xff">open an issue, or just look</a>
-    </header>
-
-    <section class="ledger" aria-label="Project ledger">
-      <p class="ledger-label">projects</p>
-      <ul class="rows">
-        <li class="row">
-          <a class="row-name" href="https://github.com/ammar0xff/Vendora">Vendora</a>
-          <p class="row-desc">Inventory, sales, HR and payroll for Arabic-speaking shops. React and TypeScript frontend on a FastAPI and PostgreSQL backend, deployed on Vercel with a Neon database.</p>
-          <p class="row-meta mono">TypeScript, React, Python, FastAPI, PostgreSQL</p>
-          <p class="row-year mono">2026</p>
-          <a class="row-link mono" href="https://github.com/ammar0xff/Vendora">repo</a>
-          <a class="row-link mono" href="https://vendora-self-xi.vercel.app">live</a>
-        </li>
-        <!-- EDIT: replace this row with your next project -->
-        <li class="row">
-          <p class="row-name row-name-ghost">Your next project</p>
-          <p class="row-desc">Edit this row in index.html. Swap the name, one line about it, the stack, the year and the links.</p>
-          <p class="row-meta mono">stack goes here</p>
-          <p class="row-year mono">edit</p>
-          <a class="row-link mono" href="https://github.com/ammar0xff">repo</a>
-          <a class="row-link mono row-link-ghost" href="#">live</a>
-        </li>
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo"><span class="glitch" data-text="A.M">A.M</span></a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#home" class="nav-link active">home</a></li>
+        <li><a href="#about" class="nav-link">about</a></li>
+        <li><a href="#projects" class="nav-link">projects</a></li>
+        <li><a href="#skills" class="nav-link">skills</a></li>
+        <li><a href="#contact" class="nav-link">contact</a></li>
       </ul>
-    </section>
+    </div>
+  </nav>
 
-    <footer class="foot">
-      <a href="https://github.com/ammar0xff">github</a>
-      <!-- EDIT: swap the noreply address for your real inbox -->
-      <a href="mailto:ammar0xff@users.noreply.github.com">email</a>
-      <span class="mono foot-year" id="year"></span>
-    </footer>
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="scanlines"></div>
+    <div class="hero-container">
+      <div class="hero-content">
+        <p class="hero-prefix">root@kali:~#</p>
+        <h1 class="hero-name glitch" data-text="Ammar Mohamed">Ammar Mohamed</h1>
+        <p class="hero-title"><span class="typing-text">penetration_tester</span><span class="cursor">_</span></p>
+        <p class="hero-desc">from egypt. bug bounty hunter, developer, and open-source contributor. my story is yet to be written.</p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn btn-primary"><i class="fas fa-terminal"></i> view projects</a>
+          <a href="#contact" class="btn btn-outline"><i class="fas fa-signal"></i> contact</a>
+        </div>
+        <div class="hero-socials">
+          <a href="https://github.com/ammar0xff" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/ammar0xf/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="mailto:ammar0xf@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://www.facebook.com/ammar0xff/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://ammar0xff.t.me/" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="avatar-frame">
+          <img src="https://avatars.githubusercontent.com/u/ammar0xff" alt="Ammar Mohamed">
+          <div class="avatar-ring"></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <a href="#about"><i class="fas fa-chevron-down"></i></a>
+    </div>
+  </section>
 
-  </main>
+  <!-- ===== ABOUT ===== -->
+  <section class="about" id="about">
+    <div class="container">
+      <h2 class="section-title"><span class="green">&gt;</span> whoami</h2>
+      <div class="about-content">
+        <div class="terminal-card">
+          <div class="terminal-bar">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="terminal-title">ammar0xff@portfolio:~</span>
+          </div>
+          <div class="terminal-body">
+            <p><span class="green">$</span> cat about.txt</p>
+            <br>
+            <p>hi, i'm <strong class="green">ammar mohamed</strong>, a penetration tester from <strong class="green">suez, egypt</strong>.</p>
+            <p>i'm currently a student diving deep into bug bounty hunting and cybersecurity.</p>
+            <p>i believe in the power of open source and continuous learning. when i'm not breaking things (legally), i'm building tools and platforms that solve real problems.</p>
+            <p>my interests span from offensive security to full-stack development, with a particular focus on building arabic-first software and contributing to the linux gaming community.</p>
+            <br>
+            <p><span class="green">$</span> grep -i "status" identity.json</p>
+            <br>
+            <p class="info-line"><span class="muted">location:</span> suez, egypt</p>
+            <p class="info-line"><span class="muted">education:</span> 24 oct high school</p>
+            <p class="info-line"><span class="muted">role:</span> bug bounty hunter</p>
+            <p class="info-line"><span class="muted">focus:</span> open source contributor</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROJECTS ===== -->
+  <section class="projects" id="projects">
+    <div class="container">
+      <h2 class="section-title"><span class="green">&gt;</span> ls -la ~/projects</h2>
+      <div class="projects-grid">
+
+        <div class="project-card featured">
+          <div class="project-header">
+            <i class="fas fa-folder project-icon"></i>
+            <div class="project-links">
+              <a href="https://github.com/ammar0xff/GitHub_Machines" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+          <h3 class="project-name">GitHub_Machines</h3>
+          <p class="project-desc">get a temporary machine via github's workflow run. free rdp, vps, and server access using github actions.</p>
+          <div class="project-tech">
+            <span>JavaScript</span>
+            <span>GitHub Actions</span>
+            <span>DevOps</span>
+          </div>
+          <div class="project-stars"><i class="fas fa-star"></i> 19</div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <i class="fas fa-folder project-icon"></i>
+            <div class="project-links">
+              <a href="https://github.com/ammar0xff/Vendora" target="_blank"><i class="fab fa-github"></i></a>
+              <a href="https://vendora-self-xi.vercel.app" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+          <h3 class="project-name">Vendora</h3>
+          <p class="project-desc">arabic-first inventory, sales, hr and payroll erp for shops that run on paper.</p>
+          <div class="project-tech">
+            <span>Python</span>
+            <span>TypeScript</span>
+            <span>FastAPI</span>
+            <span>PostgreSQL</span>
+          </div>
+          <div class="project-stars"><i class="fas fa-star"></i> 0</div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <i class="fas fa-folder project-icon"></i>
+            <div class="project-links">
+              <a href="https://github.com/ammar0xff/Dispatch" target="_blank"><i class="fab fa-github"></i></a>
+              <a href="https://ammar0xff.github.io/Dispatch/" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+          <h3 class="project-name">Dispatch</h3>
+          <p class="project-desc">qr-based field work supervision: worker client app + admin dashboard with live map.</p>
+          <div class="project-tech">
+            <span>Dart</span>
+            <span>Android</span>
+            <span>Location</span>
+          </div>
+          <div class="project-stars"><i class="fas fa-star"></i> 2</div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <i class="fas fa-folder project-icon"></i>
+            <div class="project-links">
+              <a href="https://github.com/ammar0xff/MaroHub" target="_blank"><i class="fab fa-github"></i></a>
+              <a href="https://ammar0xff.github.io/MaroHub/" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+          <h3 class="project-name">MaroHub</h3>
+          <p class="project-desc">game discovery and download platform for linux gamers and open-source fans.</p>
+          <div class="project-tech">
+            <span>TypeScript</span>
+            <span>Linux</span>
+            <span>Gaming</span>
+          </div>
+          <div class="project-stars"><i class="fas fa-star"></i> 5</div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <i class="fas fa-folder project-icon"></i>
+            <div class="project-links">
+              <a href="https://github.com/ammar0xff/Mbedly" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+          <h3 class="project-name">Mbedly</h3>
+          <p class="project-desc">full-featured video downloader that supports many sites.</p>
+          <div class="project-tech">
+            <span>Shell</span>
+            <span>Automation</span>
+            <span>Scraping</span>
+          </div>
+          <div class="project-stars"><i class="fas fa-star"></i> 0</div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <i class="fas fa-folder project-icon"></i>
+            <div class="project-links">
+              <a href="https://github.com/ammar0xff/Smarty" target="_blank"><i class="fab fa-github"></i></a>
+              <a href="https://ammar0xff.github.io/Smarty/" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+          <h3 class="project-name">Smarty</h3>
+          <p class="project-desc">a smart tool built with typescript for everyday tasks.</p>
+          <div class="project-tech">
+            <span>TypeScript</span>
+          </div>
+          <div class="project-stars"><i class="fas fa-star"></i> 0</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SKILLS ===== -->
+  <section class="skills" id="skills">
+    <div class="container">
+      <h2 class="section-title"><span class="green">&gt;</span> cat skills.json</h2>
+
+      <div class="skills-grid">
+        <div class="skills-category">
+          <h3 class="skills-subtitle"><i class="fas fa-code green"></i> languages</h3>
+          <div class="skills-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Bash</span>
+            <span class="skill-tag">Shell</span>
+            <span class="skill-tag">C</span>
+            <span class="skill-tag">C++</span>
+            <span class="skill-tag">PHP</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">HTML5</span>
+            <span class="skill-tag">CSS3</span>
+            <span class="skill-tag">Dart</span>
+            <span class="skill-tag">TypeScript</span>
+          </div>
+        </div>
+
+        <div class="skills-category">
+          <h3 class="skills-subtitle"><i class="fas fa-shield-alt green"></i> security & os</h3>
+          <div class="skills-tags">
+            <span class="skill-tag">Kali Linux</span>
+            <span class="skill-tag">Linux</span>
+            <span class="skill-tag">Windows</span>
+            <span class="skill-tag">Red Hat</span>
+            <span class="skill-tag">Debian</span>
+            <span class="skill-tag">Ubuntu</span>
+            <span class="skill-tag">WSL</span>
+            <span class="skill-tag">Bug Bounty</span>
+            <span class="skill-tag">Pentesting</span>
+          </div>
+        </div>
+
+        <div class="skills-category">
+          <h3 class="skills-subtitle"><i class="fas fa-cloud green"></i> deployment</h3>
+          <div class="skills-tags">
+            <span class="skill-tag">AWS</span>
+            <span class="skill-tag">Azure</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">GitHub Actions</span>
+            <span class="skill-tag">Vercel</span>
+            <span class="skill-tag">GitHub Pages</span>
+          </div>
+        </div>
+
+        <div class="skills-category">
+          <h3 class="skills-subtitle"><i class="fas fa-pen green"></i> editors & docs</h3>
+          <div class="skills-tags">
+            <span class="skill-tag">VS Code</span>
+            <span class="skill-tag">VIM</span>
+            <span class="skill-tag">Sublime</span>
+            <span class="skill-tag">Markdown</span>
+            <span class="skill-tag">Obsidian</span>
+            <span class="skill-tag">Notion</span>
+          </div>
+        </div>
+
+        <div class="skills-category">
+          <h3 class="skills-subtitle"><i class="fas fa-microchip green"></i> hardware</h3>
+          <div class="skills-tags">
+            <span class="skill-tag">Raspberry Pi</span>
+            <span class="skill-tag">Arduino</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2 class="section-title"><span class="green">&gt;</span> nmap -sV contact.info</h2>
+      <p class="contact-text">got a project in mind? found a bug? just want to say hi? feel free to reach out.</p>
+      <div class="contact-grid">
+        <a href="mailto:ammar0xf@gmail.com" class="contact-card">
+          <i class="fas fa-envelope"></i>
+          <span>email</span>
+          <small>ammar0xf@gmail.com</small>
+        </a>
+        <a href="https://github.com/ammar0xff" target="_blank" class="contact-card">
+          <i class="fab fa-github"></i>
+          <span>github</span>
+          <small>@ammar0xff</small>
+        </a>
+        <a href="https://www.linkedin.com/in/ammar0xf/" target="_blank" class="contact-card">
+          <i class="fab fa-linkedin-in"></i>
+          <span>linkedin</span>
+          <small>@ammar0xf</small>
+        </a>
+        <a href="https://www.facebook.com/ammar0xff/" target="_blank" class="contact-card">
+          <i class="fab fa-facebook-f"></i>
+          <span>facebook</span>
+          <small>@ammar0xff</small>
+        </a>
+        <a href="https://ammar0xff.t.me/" target="_blank" class="contact-card">
+          <i class="fab fa-telegram-plane"></i>
+          <span>telegram</span>
+          <small>@ammar0xff</small>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p class="muted">&copy; <span id="year"></span> ammar mohamed. built with html & css.</p>
+        <div class="footer-socials">
+          <a href="https://github.com/ammar0xff" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/ammar0xf/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a href="mailto:ammar0xf@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    const toggle = document.getElementById('nav-toggle');
+    const menu = document.getElementById('nav-menu');
+    toggle.addEventListener('click', () => {
+      menu.classList.toggle('active');
+      toggle.querySelector('i').classList.toggle('fa-bars');
+      toggle.querySelector('i').classList.toggle('fa-times');
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('active');
+        toggle.querySelector('i').classList.add('fa-bars');
+        toggle.querySelector('i').classList.remove('fa-times');
+      });
+    });
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const top = section.offsetTop - 100;
+        if (pageYOffset >= top) current = section.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+      });
+    });
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>

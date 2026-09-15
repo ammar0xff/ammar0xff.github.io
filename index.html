@@ -555,14 +555,13 @@
   <script>
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // ===== BOOT SPLASH (faithful GRUB -> kernel -> systemd -> login) =====
+    // ===== BOOT SPLASH (faithful kernel -> systemd -> login) =====
     const bootScreen = document.getElementById('boot-screen');
     const bootLines = document.getElementById('boot-lines');
     const bootHint = document.getElementById('boot-hint');
     const bootSleep = (ms) => new Promise(r => setTimeout(r, ms));
     const bootEsc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     const OK = '<span class="ok">[  OK  ]</span>';
-    const padTo = (s, w) => (s + ' '.repeat(w)).slice(0, w);
 
     function bootLine(html) {
       const d = document.createElement('div');
@@ -595,33 +594,6 @@
     ['keydown', 'click', 'touchstart'].forEach(ev =>
       window.addEventListener(ev, skipBoot, { once: true, capture: true })
     );
-
-    // --- GRUB ------
-    async function grubPhase() {
-      const W = 58;
-      const title = 'GNU GRUB  version 2.06';
-      const entries = [
-        'ammar0xff_OS',
-        'Advanced options for ammar0xff_OS',
-        'Memory test (memtest86+)',
-      ];
-      const row = (c, cls) =>
-        '<span class="' + cls + '">│' + padTo(c, W) + '│</span>';
-      let g =
-        bootEsc(title) + '\n' +
-        '┌' + '─'.repeat(W) + '┐\n' +
-        row('', 'grub-plain') + '\n';
-      entries.forEach((e, i) => {
-        g += (i === 0 ? row(padTo('* ' + e, W), 'grub-hi') : row(padTo('  ' + e, W), 'grub-plain')) + '\n';
-      });
-      g += row('', 'grub-plain') + '\n' +
-        '└' + '─'.repeat(W) + '┘';
-      bootLine('<span class="grub">' + g + '</span>');
-      const cd = bootLine('<span class="dim">The highlighted entry will be executed automatically in 1s...</span>');
-      await bootSleep(1500);
-      cd.textContent = 'The highlighted entry will be executed automatically in 0s...';
-      await bootSleep(700);
-    }
 
     // --- kernel ------
     async function kernelPhase() {
@@ -704,7 +676,6 @@
 
     async function playBoot() {
       bootHint.style.opacity = 1;
-      await grubPhase();
       await kernelPhase();
       await systemdPhase();
       await loginPhase();

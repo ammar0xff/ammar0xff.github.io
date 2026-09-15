@@ -130,18 +130,6 @@ img {
 .boot-lines .cur.block {
   animation: blink 1s step-end infinite;
 }
-.grub {
-  display: inline-block;
-  line-height: 1.4;
-}
-.grub .grub-plain {
-  color: #d0d0d0;
-}
-.grub .grub-hi {
-  background: #eaeaea;
-  color: #000;
-  font-weight: 700;
-}
 .boot-hint {
   margin-top: 1.75rem;
   font-family: "DejaVu Sans Mono", "Ubuntu Mono", "Liberation Mono", Consolas, monospace;

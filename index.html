@@ -555,47 +555,32 @@
   <script>
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // ===== BOOT SPLASH =====
+    // ===== BOOT SPLASH (faithful GRUB -> kernel -> systemd -> login) =====
     const bootScreen = document.getElementById('boot-screen');
     const bootLines = document.getElementById('boot-lines');
     const bootHint = document.getElementById('boot-hint');
-    const bootPrompt = 'root@ammar0xff:~# ';
-    const bootLog = [
-      'GNU GRUB version 2.06',
-      '  * ammar0xff_OS (default) .......... your_fav_computer_guy',
-      '',
-      'Linux ammar0xff 6.6.0-cyberpunk SMP PREEMPT',
-      '    mounting devtmpfs ................ [ OK ]',
-      '    mounting /proc /sys /dev .......... [ OK ]',
-      '    mounting / (ext4, rw) ............. [ OK ]',
-      '    starting systemd v255 ............. [ OK ]',
-      '    starting udev ..................... [ OK ]',
-      '    starting network.service .......... [ OK ]',
-      '    starting sshd (port 22) ........... [ OK ]',
-      '    starting display-manager .......... [ OK ]',
-      '    reached multi-user.target ......... [ OK ]',
-      '',
-      'ammar0xff login: root',
-    ];
-
     const bootSleep = (ms) => new Promise(r => setTimeout(r, ms));
-    function bootEscape(text) {
-      return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    }
-    function bootSpan(text) {
-      return bootEscape(text).replace(/\[ OK \]/g, '<span class="ok">[ OK ]</span>');
-    }
-    function appendBootLine(html) {
+    const bootEsc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const OK = '<span class="ok">[  OK  ]</span>';
+    const padTo = (s, w) => (s + ' '.repeat(w)).slice(0, w);
+
+    function bootLine(html) {
       const d = document.createElement('div');
       d.innerHTML = html;
       bootLines.appendChild(d);
       return d;
     }
-    async function bootTypeCommand(text, speed) {
-      const d = appendBootLine('<span class="prompt">' + bootPrompt + '</span><span class="cmd"></span>');
-      const cmd = d.querySelector('.cmd');
-      for (let i = 0; i <= text.length; i++) {
-        cmd.textContent = text.slice(0, i);
+    function bootText(t) {
+      return bootLine(bootEsc(t));
+    }
+    function bootScreenClear() {
+      bootLines.innerHTML = '';
+    }
+    async function bootTypeCmd(cmd, speed) {
+      const d = bootLine('<span class="prompt">root@ammar0xff:~# </span><span class="cmd"></span>');
+      const c = d.querySelector('.cmd');
+      for (let i = 0; i <= cmd.length; i++) {
+        c.textContent = cmd.slice(0, i);
         await bootSleep(speed);
       }
       return d;
@@ -604,28 +589,125 @@
       if (!document.getElementById('boot-screen')) return;
       bootScreen.classList.add('boot-done');
       bootScreen.setAttribute('aria-hidden', 'true');
-      setTimeout(() => bootScreen.remove(), 700);
+      setTimeout(() => bootScreen.remove(), 600);
     }
     const skipBoot = () => finishBoot();
     ['keydown', 'click', 'touchstart'].forEach(ev =>
       window.addEventListener(ev, skipBoot, { once: true, capture: true })
     );
 
-    async function playBoot() {
-      for (const line of bootLog) {
-        appendBootLine(bootSpan(line));
-        await bootSleep(line.includes('[ OK ]') ? 120 : line.includes('GRUB') ? 700 : 110);
+    // --- GRUB ------
+    async function grubPhase() {
+      const W = 58;
+      const title = 'GNU GRUB  version 2.06';
+      const entries = [
+        'ammar0xff_OS',
+        'Advanced options for ammar0xff_OS',
+        'Memory test (memtest86+)',
+      ];
+      const row = (c, cls) =>
+        '<span class="' + cls + '">│' + padTo(c, W) + '│</span>';
+      let g =
+        bootEsc(title) + '\n' +
+        '┌' + '─'.repeat(W) + '┐\n' +
+        row('', 'grub-plain') + '\n';
+      entries.forEach((e, i) => {
+        g += (i === 0 ? row(padTo('* ' + e, W), 'grub-hi') : row(padTo('  ' + e, W), 'grub-plain')) + '\n';
+      });
+      g += row('', 'grub-plain') + '\n' +
+        '└' + '─'.repeat(W) + '┘';
+      bootLine('<span class="grub">' + g + '</span>');
+      const cd = bootLine('<span class="dim">The highlighted entry will be executed automatically in 1s...</span>');
+      await bootSleep(1500);
+      cd.textContent = 'The highlighted entry will be executed automatically in 0s...';
+      await bootSleep(700);
+    }
+
+    // --- kernel ------
+    async function kernelPhase() {
+      bootScreenClear();
+      bootText('[    0.000000] Linux version 6.6.0-cyberpunk (root@ammar0xff) (gcc 13.2.0 (Debian)) #1 SMP PREEMPT_DYNAMIC');
+      await bootSleep(130);
+      bootText('[    0.411703] Command line: BOOT_IMAGE=/boot/vmlinuz-6.6.0-cyberpunk root=PARTUUID=3f87a6d8-01 ro quiet');
+      await bootSleep(110);
+      bootText('[    1.047226] Memory: 15877992K/16502788K available (12342K kernel code, 4128K bss, 625396K reserved)');
+      await bootSleep(110);
+      bootText('[    1.583910] sd 0:0:0:0: [sda] 251658240 512-byte logical blocks: (129 GB / 120 GiB)');
+      await bootSleep(110);
+      bootText('[    2.109307] systemd[1]: systemd 255.3-1 running in system mode (+PAM +AUDIT +SELINUX ...)');
+      await bootSleep(140);
+    }
+
+    // --- systemd ------
+    async function systemdPhase() {
+      bootLine(OK + ' ' + bootEsc('Created slice system-getty.slice.'));
+      await bootSleep(70);
+      bootLine(OK + ' ' + bootEsc('Created slice system-modprobe.slice.'));
+      await bootSleep(70);
+      bootLine(OK + ' ' + bootEsc('Mounted devtmpfs on /dev.'));
+      await bootSleep(70);
+      bootLine(OK + ' ' + bootEsc('Started OpenSSH Server Daemon.'));
+      await bootSleep(70);
+      bootLine(OK + ' ' + bootEsc('Started Network Manager.'));
+      await bootSleep(70);
+      bootLine(OK + ' ' + bootEsc('Reached target Network.'));
+      await bootSleep(70);
+      bootLine(OK + ' ' + bootEsc('Reached target Local File Systems.'));
+      await bootSleep(90);
+
+      const frames = ['|', '/', '-', '\\'];
+      const wait = bootText('');
+      for (let f = 0; f < 14; f++) {
+        wait.textContent = '     A start job is running for Wait for Network to be Configured (' + (32 - f) + 's / 1min 30s) ' + frames[f % 4];
+        await bootSleep(90);
       }
-      await bootSleep(500);
-      await bootTypeCommand('whoami', 45);
-      appendBootLine('root');
-      await bootSleep(350);
-      await bootTypeCommand('cat /status', 45);
-      await bootSleep(200);
-      appendBootLine('<span class="ok">&gt; ready. your fav computer guy is online.</span>');
+      wait.remove();
+
+      bootLine(OK + ' ' + bootEsc('Reached target Network is Online.'));
+      await bootSleep(80);
+      bootLine(OK + ' ' + bootEsc('Reached target Remote File Systems.'));
+      await bootSleep(80);
+      bootLine(OK + ' ' + bootEsc('Reached target Multi-User System.'));
+      await bootSleep(80);
+      bootLine(OK + ' ' + bootEsc('Reached target Graphical Interface.'));
+      await bootSleep(220);
+    }
+
+    // --- login ------
+    async function loginPhase() {
+      bootScreenClear();
+      bootLine('<span class="bright">Debian GNU/Linux 12 (bookworm) ammar0xff tty2</span>');
+      await bootSleep(120);
+      bootText('');
+      await bootSleep(60);
+      const login = bootLine('<span class="bright">ammar0xff login: </span><span class="cmd"></span>');
+      const lc = login.querySelector('.cmd');
+      for (let i = 0; i <= 4; i++) {
+        lc.textContent = 'root'.slice(0, i);
+        await bootSleep(90);
+      }
+      await bootSleep(140);
+      bootText('');
+      await bootSleep(60);
+      await bootTypeCmd('whoami', 45);
+      bootText('root');
+      await bootSleep(180);
+      await bootTypeCmd('cat /status', 45);
+      await bootSleep(160);
+      bootText('ready. your_fav_computer_guy.');
+      await bootSleep(220);
+      bootLine('<span class="prompt">root@ammar0xff:~# </span><span class="cur block">█</span>');
       bootHint.style.opacity = 1;
-      await bootSleep(1100);
+      await bootSleep(1400);
       finishBoot();
+    }
+
+    async function playBoot() {
+      bootHint.style.opacity = 1;
+      await grubPhase();
+      await kernelPhase();
+      await systemdPhase();
+      await loginPhase();
     }
 
     if (bootScreen) {
@@ -633,7 +715,7 @@
         finishBoot();
       } else {
         playBoot();
-        setTimeout(finishBoot, 9000);
+        setTimeout(finishBoot, 16000);
       }
     }
 

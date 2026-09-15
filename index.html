@@ -3,20 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'))}catch(e){document.documentElement.setAttribute('data-theme','dark')}</script>
   <title>Ammar Mohamed | Your Fav Computer Guy</title>
   <meta name="description" content="Ammar Mohamed - Your fav computer guy from Egypt. Bug bounty hunter, developer, and open-source contributor.">
   <meta name="theme-color" content="#000000">
+  <link rel="canonical" href="https://ammar0xff.github.io/">
   <meta property="og:title" content="Ammar Mohamed | Your Fav Computer Guy">
   <meta property="og:description" content="Bug bounty hunter, developer, and open-source contributor from Egypt.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ammar0xff.github.io/">
   <meta property="og:image" content="https://ammar0xff.github.io/assets/avatar.jpg">
+  <meta property="og:site_name" content="ammar0xff">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Ammar Mohamed | Your Fav Computer Guy">
+  <meta name="twitter:description" content="Bug bounty hunter, developer, and open-source contributor from Egypt.">
+  <meta name="twitter:image" content="https://ammar0xff.github.io/assets/avatar.jpg">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/vendor/fontawesome/all.min.css">
   <link rel="stylesheet" href="styles.css">
+  <noscript><style>.boot-screen{display:none}</style></noscript>
 </head>
 <body>
 
@@ -34,9 +40,6 @@
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <a href="#home" class="nav-logo"><span class="glitch" data-text="A.M">A.M</span></a>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
       <ul class="nav-menu" id="nav-menu">
         <li><a href="#home" class="nav-link active">home</a></li>
         <li><a href="#about" class="nav-link">about</a></li>
@@ -46,6 +49,14 @@
         <li><a href="#certifications" class="nav-link">certs</a></li>
         <li><a href="#contact" class="nav-link">contact</a></li>
       </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle color theme">
+          <i class="fas fa-moon" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-controls="nav-menu" aria-expanded="false">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -65,17 +76,17 @@
           <a href="cv.html" class="btn btn-outline"><i class="fas fa-file-alt"></i> cv</a>
         </div>
         <div class="hero-socials">
-          <a href="https://github.com/ammar0xff" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-          <a href="https://www.linkedin.com/in/ammar0xf/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://tryhackme.com/r/p/ammar0xff" target="_blank" aria-label="TryHackMe"><i class="fas fa-flag"></i></a>
+          <a href="https://github.com/ammar0xff" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/ammar0xf/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://tryhackme.com/r/p/ammar0xff" target="_blank" rel="noopener" aria-label="TryHackMe"><i class="fas fa-flag"></i></a>
           <a href="mailto:ammar0xf@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-          <a href="https://www.facebook.com/ammar0xff/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://ammar0xff.t.me/" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+          <a href="https://www.facebook.com/ammar0xff/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://ammar0xff.t.me/" target="_blank" rel="noopener" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
         </div>
       </div>
       <div class="hero-image">
         <div class="avatar-frame">
-          <img class="avatar" src="assets/avatar.jpg" alt="Portrait of Ammar Mohamed" loading="lazy">
+          <img class="avatar" src="assets/avatar.jpg" alt="Portrait of Ammar Mohamed" width="280" height="350" fetchpriority="high" decoding="async">
           <div class="avatar-scan"></div>
           <div class="avatar-ring"></div>
           <span class="avatar-corner tl"></span>
@@ -505,27 +516,27 @@
           <span>email</span>
           <small>ammar0xf@gmail.com</small>
         </a>
-        <a href="https://github.com/ammar0xff" target="_blank" class="contact-card">
+        <a href="https://github.com/ammar0xff" target="_blank" rel="noopener" class="contact-card">
           <i class="fab fa-github"></i>
           <span>github</span>
           <small>@ammar0xff</small>
         </a>
-        <a href="https://www.linkedin.com/in/ammar0xf/" target="_blank" class="contact-card">
+        <a href="https://www.linkedin.com/in/ammar0xf/" target="_blank" rel="noopener" class="contact-card">
           <i class="fab fa-linkedin-in"></i>
           <span>linkedin</span>
           <small>@ammar0xf</small>
         </a>
-        <a href="https://tryhackme.com/r/p/ammar0xff" target="_blank" class="contact-card">
+        <a href="https://tryhackme.com/r/p/ammar0xff" target="_blank" rel="noopener" class="contact-card">
           <i class="fas fa-flag"></i>
           <span>tryhackme</span>
           <small>@ammar0xff</small>
         </a>
-        <a href="https://www.facebook.com/ammar0xff/" target="_blank" class="contact-card">
+        <a href="https://www.facebook.com/ammar0xff/" target="_blank" rel="noopener" class="contact-card">
           <i class="fab fa-facebook-f"></i>
           <span>facebook</span>
           <small>@ammar0xff</small>
         </a>
-        <a href="https://ammar0xff.t.me/" target="_blank" class="contact-card">
+        <a href="https://ammar0xff.t.me/" target="_blank" rel="noopener" class="contact-card">
           <i class="fab fa-telegram-plane"></i>
           <span>telegram</span>
           <small>@ammar0xff</small>
@@ -690,21 +701,46 @@
       }
     }
 
+    // ===== THEME TOGGLE =====
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+    const applyTheme = (theme) => {
+      document.documentElement.setAttribute('data-theme', theme);
+      themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+      if (themeColorMeta) themeColorMeta.setAttribute('content', theme === 'dark' ? '#000000' : '#f4f4f4');
+    };
+    const storedTheme = (() => { try { return localStorage.getItem('theme') || null; } catch (e) { return null; } })();
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(storedTheme || (systemDark ? 'dark' : 'light'));
+    themeToggle.addEventListener('click', () => {
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+
+    // ===== MOBILE MENU =====
     const toggle = document.getElementById('nav-toggle');
     const menu = document.getElementById('nav-menu');
-    toggle.addEventListener('click', () => {
-      menu.classList.toggle('active');
-      toggle.querySelector('i').classList.toggle('fa-bars');
-      toggle.querySelector('i').classList.toggle('fa-times');
-      document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
-    });
+    const setMenu = (open) => {
+      menu.classList.toggle('active', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+      toggle.querySelector('i').className = open ? 'fas fa-times' : 'fas fa-bars';
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
+    toggle.addEventListener('click', () => setMenu(!menu.classList.contains('active')));
     document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        menu.classList.remove('active');
-        toggle.querySelector('i').classList.add('fa-bars');
-        toggle.querySelector('i').classList.remove('fa-times');
-        document.body.style.overflow = '';
-      });
+      link.addEventListener('click', () => setMenu(false));
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.classList.contains('active')) setMenu(false);
+    });
+    document.addEventListener('click', (e) => {
+      if (menu.classList.contains('active') && !menu.contains(e.target) && !toggle.contains(e.target)) setMenu(false);
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768 && menu.classList.contains('active')) setMenu(false);
     });
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-link');

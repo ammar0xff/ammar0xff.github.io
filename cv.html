@@ -84,10 +84,10 @@
     <div id="pdf-canvas-wrap"></div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="assets/vendor/pdfjs/pdf.min.js"></script>
   <script>
     pdfjsLib.GlobalWorkerOptions.workerSrc =
-      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      'assets/vendor/pdfjs/pdf.worker.min.js';
 
     const status = document.getElementById('pdf-status');
     const wrap = document.getElementById('pdf-canvas-wrap');

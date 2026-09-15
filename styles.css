@@ -8,8 +8,15 @@
   --green: #00FF41;
   --green-dim: rgba(0, 255, 65, 0.15);
   --green-glow: rgba(0, 255, 65, 0.4);
+  --green-ink: #000;
   --red: #FF3333;
   --red-dim: rgba(255, 51, 51, 0.15);
+  --gold: #FFD700;
+  --gold-dim: rgba(255, 215, 0, 0.08);
+  --gold-border: rgba(255, 215, 0, 0.25);
+  --dot-red: #FF5F56;
+  --dot-yellow: #FFBD2E;
+  --dot-green: #27C93F;
   --bg: #000000;
   --surface: #0a0a0a;
   --card: #0C130E;
@@ -17,6 +24,36 @@
   --text: #E0E0E0;
   --muted: #94A3B8;
   --radius: 4px;
+  --boot-bg: #000;
+  --boot-text: #c6c6c6;
+  --boot-ok: #00e676;
+  --boot-bright: #eaeaea;
+  --boot-dim: #9a9a9a;
+  color-scheme: dark;
+}
+
+html[data-theme="light"] {
+  --green: #0a7c33;
+  --green-dim: rgba(10, 124, 51, 0.12);
+  --green-glow: rgba(10, 124, 51, 0.3);
+  --green-ink: #ffffff;
+  --red: #c22;
+  --red-dim: rgba(200, 34, 34, 0.12);
+  --gold: #9a6b00;
+  --gold-dim: rgba(154, 107, 0, 0.1);
+  --gold-border: rgba(154, 107, 0, 0.3);
+  --bg: #f4f4f4;
+  --surface: #ffffff;
+  --card: #eefbf1;
+  --border: #d7dbe0;
+  --text: #161616;
+  --muted: #5a6472;
+  --boot-bg: #000;
+  --boot-text: #c6c6c6;
+  --boot-ok: #00e676;
+  --boot-bright: #eaeaea;
+  --boot-dim: #9a9a9a;
+  color-scheme: light;
 }
 
 *,
@@ -28,12 +65,12 @@
 }
 
 html {
-  color-scheme: dark;
   scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
 }
 
 body {
-  font-family: "Fira Code", monospace;
+  font-family: "Fira Code", ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.7;
@@ -88,7 +125,7 @@ img {
   position: fixed;
   inset: 0;
   z-index: 10000;
-  background: #000;
+  background: var(--boot-bg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -108,24 +145,24 @@ img {
   font-family: "DejaVu Sans Mono", "Ubuntu Mono", "Liberation Mono", Consolas, "Courier New", monospace;
   font-size: 15px;
   line-height: 1.45;
-  color: #c6c6c6;
+  color: var(--boot-text);
 }
 .boot-lines div {
   white-space: pre;
 }
 .boot-lines .ok {
-  color: #00e676;
+  color: var(--boot-ok);
   font-weight: 700;
 }
 .boot-lines .prompt,
 .boot-lines .bright {
-  color: #eaeaea;
+  color: var(--boot-bright);
 }
 .boot-lines .cmd {
-  color: #eaeaea;
+  color: var(--boot-bright);
 }
 .boot-lines .dim {
-  color: #9a9a9a;
+  color: var(--boot-dim);
 }
 .boot-lines .cur.block {
   animation: blink 1s step-end infinite;
@@ -134,7 +171,7 @@ img {
   margin-top: 1.75rem;
   font-family: "DejaVu Sans Mono", "Ubuntu Mono", "Liberation Mono", Consolas, monospace;
   font-size: 13px;
-  color: #9a9a9a;
+  color: var(--boot-dim);
   opacity: 0;
 }
 
@@ -213,10 +250,10 @@ img {
   padding: 0 2rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 2rem;
 }
 .nav-logo {
-  font-family: "Share Tech Mono", monospace;
+  font-family: "Share Tech Mono", "Fira Code", monospace;
   font-size: 1.25rem;
   color: var(--green);
   text-shadow: 0 0 10px var(--green-glow);
@@ -225,9 +262,10 @@ img {
   display: flex;
   list-style: none;
   gap: 2rem;
+  margin-right: auto;
 }
 .nav-link {
-  font-family: "Share Tech Mono", monospace;
+  font-family: "Share Tech Mono", "Fira Code", monospace;
   font-size: 0.875rem;
   color: var(--muted);
   text-transform: lowercase;
@@ -238,15 +276,34 @@ img {
   color: var(--green);
   text-shadow: 0 0 8px var(--green-glow);
 }
-.nav-toggle {
-  display: none;
-  background: none;
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.nav-toggle,
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
   border: 1px solid var(--border);
   color: var(--green);
-  font-size: 1.25rem;
+  font-size: 0.9375rem;
   padding: 0.5rem;
   cursor: pointer;
   border-radius: var(--radius);
+  width: 40px;
+  height: 40px;
+  transition: color 0.2s, border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.nav-toggle {
+  display: none;
+}
+.nav-toggle:hover,
+.theme-toggle:hover {
+  border-color: var(--green);
+  box-shadow: 0 0 10px var(--green-glow);
 }
 
 /* ===== HERO ===== */
@@ -268,14 +325,14 @@ img {
   align-items: center;
 }
 .hero-prefix {
-  font-family: "Share Tech Mono", monospace;
+  font-family: "Share Tech Mono", "Fira Code", monospace;
   color: var(--green);
   font-size: 0.875rem;
   margin-bottom: 0.5rem;
   text-shadow: 0 0 8px var(--green-glow);
 }
 .hero-name {
-  font-family: "Share Tech Mono", monospace;
+  font-family: "Share Tech Mono", "Fira Code", monospace;
   font-size: clamp(2.5rem, 6vw, 4.5rem);
   font-weight: 700;
   color: var(--text);
@@ -284,7 +341,7 @@ img {
   text-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
 }
 .hero-title {
-  font-family: "Share Tech Mono", monospace;
+  font-family: "Share Tech Mono", "Fira Code", monospace;
   font-size: clamp(1rem, 2.5vw, 1.5rem);
   color: var(--green);
   margin-bottom: 1.5rem;
@@ -313,7 +370,7 @@ img {
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  font-family: "Share Tech Mono", monospace;
+  font-family: "Share Tech Mono", "Fira Code", monospace;
   font-size: 0.875rem;
   border-radius: var(--radius);
   cursor: pointer;
@@ -322,7 +379,7 @@ img {
 }
 .btn-primary {
   background: var(--green);
-  color: #000;
+  color: var(--green-ink);
   border-color: var(--green);
 }
 .btn-primary:hover {
@@ -337,7 +394,7 @@ img {
 }
 .btn-outline:hover {
   background: var(--green);
-  color: #000;
+  color: var(--green-ink);
   box-shadow: 0 0 15px var(--green-glow);
 }
 .hero-socials {
@@ -445,7 +502,7 @@ img {
 
 /* ===== SECTION TITLES ===== */
 .section-title {
-  font-family: "Share Tech Mono", monospace;
+  font-family: "Share Tech Mono", "Fira Code", monospace;
   font-size: 1.5rem;
   color: var(--text);
   margin-bottom: 3rem;
@@ -476,9 +533,9 @@ img {
   height: 10px;
   border-radius: 50%;
 }
-.dot.red { background: #FF5F56; }
-.dot.yellow { background: #FFBD2E; }
-.dot.green { background: #27C93F; }
+.dot.red { background: var(--dot-red); }
+.dot.yellow { background: var(--dot-yellow); }
+.dot.green { background: var(--dot-green); }
 .terminal-title {
   font-size: 0.75rem;
   color: var(--muted);
@@ -546,7 +603,7 @@ img {
   color: var(--green);
 }
 .project-name {
-  font-family: "Share Tech Mono", monospace;
+  font-family: "Share Tech Mono", "Fira Code", monospace;
   font-size: 1.125rem;
   color: var(--green);
   margin-bottom: 0.5rem;
@@ -576,7 +633,7 @@ img {
   color: var(--muted);
 }
 .project-stars i {
-  color: #FFD700;
+  color: var(--gold);
   margin-right: 0.25rem;
 }
 
@@ -591,7 +648,7 @@ img {
   gap: 2rem;
 }
 .skills-subtitle {
-  font-family: "Share Tech Mono", monospace;
+  font-family: "Share Tech Mono", "Fira Code", monospace;
   font-size: 1rem;
   color: var(--text);
   margin-bottom: 1rem;
@@ -615,7 +672,7 @@ img {
 }
 .skill-tag:hover {
   background: var(--green);
-  color: #000;
+  color: var(--green-ink);
   box-shadow: 0 0 10px var(--green-glow);
 }
 
@@ -656,7 +713,7 @@ img {
   color: var(--green);
 }
 .contact-card span {
-  font-family: "Share Tech Mono", monospace;
+  font-family: "Share Tech Mono", "Fira Code", monospace;
   font-size: 0.875rem;
   color: var(--text);
 }
@@ -716,7 +773,7 @@ img {
 }
 .back-to-top:hover {
   background: var(--green);
-  color: #000;
+  color: var(--green-ink);
   box-shadow: 0 0 15px var(--green-glow);
 }
 
@@ -775,7 +832,7 @@ img {
   margin-bottom: 0.25rem;
 }
 .timeline-head h3 {
-  font-family: "Share Tech Mono", monospace;
+  font-family: "Share Tech Mono", "Fira Code", monospace;
   font-size: 1rem;
   color: var(--green);
   text-shadow: 0 0 5px rgba(0, 255, 65, 0.2);
@@ -832,10 +889,10 @@ a.cert-card:hover {
   color: var(--green);
 }
 .cert-card.pending > i {
-  color: #FFD700;
+  color: var(--gold);
 }
 .cert-card h3 {
-  font-family: "Share Tech Mono", monospace;
+  font-family: "Share Tech Mono", "Fira Code", monospace;
   font-size: 0.875rem;
   color: var(--text);
   line-height: 1.3;
@@ -860,9 +917,9 @@ a.cert-card:hover {
   border: 1px solid rgba(0, 255, 65, 0.2);
 }
 .cert-badge.pending {
-  color: #FFD700;
-  background: rgba(255, 215, 0, 0.08);
-  border: 1px solid rgba(255, 215, 0, 0.25);
+  color: var(--gold);
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-border);
 }
 .cert-badge .fa-spinner {
   animation: spin 1.5s linear infinite;
@@ -937,17 +994,19 @@ a.cert-card:hover {
 
 /* Mobile */
 @media (max-width: 768px) {
-  .nav-toggle {
-    display: block;
+  .nav-actions {
     position: fixed;
     top: 1rem;
     right: 1rem;
     z-index: 1001;
+  }
+  .nav-toggle {
+    display: flex;
+  }
+  .nav-toggle,
+  .theme-toggle {
     width: 44px;
     height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
   .nav-menu {
     position: fixed;
@@ -1178,12 +1237,13 @@ a.cert-card:hover {
 
 /* ===== PRINT ===== */
 @media print {
-  .scanlines, .navbar, .hero-scroll { display: none; }
-  body { background: #fff; color: #000; }
+  .scanlines, .navbar, .hero-scroll, .back-to-top, .scroll-progress { display: none; }
+  body { background: var(--bg); color: var(--text); }
   :root {
     --green: #006400;
     --green-dim: rgba(0, 100, 0, 0.1);
     --green-glow: transparent;
+    --green-ink: #fff;
     --red: #8B0000;
     --bg: #fff;
     --surface: #f5f5f5;

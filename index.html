@@ -20,6 +20,14 @@
 </head>
 <body>
 
+  <!-- ===== BOOT SPLASH ===== -->
+  <div class="boot-screen" id="boot-screen" aria-hidden="true">
+    <div class="boot-terminal">
+      <div class="boot-lines" id="boot-lines"></div>
+      <div class="boot-hint" id="boot-hint">press any key to skip</div>
+    </div>
+  </div>
+
   <div class="scroll-progress" id="scroll-progress"></div>
 
   <!-- ===== NAVBAR ===== -->
@@ -546,6 +554,88 @@
 
   <script>
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ===== BOOT SPLASH =====
+    const bootScreen = document.getElementById('boot-screen');
+    const bootLines = document.getElementById('boot-lines');
+    const bootHint = document.getElementById('boot-hint');
+    const bootPrompt = 'root@ammar0xff:~# ';
+    const bootLog = [
+      'GNU GRUB version 2.06',
+      '  * ammar0xff_OS (default) .......... your_fav_computer_guy',
+      '',
+      'Linux ammar0xff 6.6.0-cyberpunk SMP PREEMPT',
+      '    mounting devtmpfs ................ [ OK ]',
+      '    mounting /proc /sys /dev .......... [ OK ]',
+      '    mounting / (ext4, rw) ............. [ OK ]',
+      '    starting systemd v255 ............. [ OK ]',
+      '    starting udev ..................... [ OK ]',
+      '    starting network.service .......... [ OK ]',
+      '    starting sshd (port 22) ........... [ OK ]',
+      '    starting display-manager .......... [ OK ]',
+      '    reached multi-user.target ......... [ OK ]',
+      '',
+      'ammar0xff login: root',
+    ];
+
+    const bootSleep = (ms) => new Promise(r => setTimeout(r, ms));
+    function bootEscape(text) {
+      return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+    function bootSpan(text) {
+      return bootEscape(text).replace(/\[ OK \]/g, '<span class="ok">[ OK ]</span>');
+    }
+    function appendBootLine(html) {
+      const d = document.createElement('div');
+      d.innerHTML = html;
+      bootLines.appendChild(d);
+      return d;
+    }
+    async function bootTypeCommand(text, speed) {
+      const d = appendBootLine('<span class="prompt">' + bootPrompt + '</span><span class="cmd"></span>');
+      const cmd = d.querySelector('.cmd');
+      for (let i = 0; i <= text.length; i++) {
+        cmd.textContent = text.slice(0, i);
+        await bootSleep(speed);
+      }
+      return d;
+    }
+    function finishBoot() {
+      if (!document.getElementById('boot-screen')) return;
+      bootScreen.classList.add('boot-done');
+      bootScreen.setAttribute('aria-hidden', 'true');
+      setTimeout(() => bootScreen.remove(), 700);
+    }
+    const skipBoot = () => finishBoot();
+    ['keydown', 'click', 'touchstart'].forEach(ev =>
+      window.addEventListener(ev, skipBoot, { once: true, capture: true })
+    );
+
+    async function playBoot() {
+      for (const line of bootLog) {
+        appendBootLine(bootSpan(line));
+        await bootSleep(line.includes('[ OK ]') ? 120 : line.includes('GRUB') ? 700 : 110);
+      }
+      await bootSleep(500);
+      await bootTypeCommand('whoami', 45);
+      appendBootLine('root');
+      await bootSleep(350);
+      await bootTypeCommand('cat /status', 45);
+      await bootSleep(200);
+      appendBootLine('<span class="ok">&gt; ready. your fav computer guy is online.</span>');
+      bootHint.style.opacity = 1;
+      await bootSleep(1100);
+      finishBoot();
+    }
+
+    if (bootScreen) {
+      if (reduceMotion) {
+        finishBoot();
+      } else {
+        playBoot();
+        setTimeout(finishBoot, 9000);
+      }
+    }
 
     const toggle = document.getElementById('nav-toggle');
     const menu = document.getElementById('nav-menu');

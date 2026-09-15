@@ -7,6 +7,7 @@
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="stylesheet" href="styles.css">
 <style>
+  :root { --pdf-bg: #1a1c1a; }
   .cv-topbar {
     position: sticky;
     top: 0;
@@ -32,7 +33,7 @@
   }
   .cv-topbar a:hover { text-shadow: 0 0 8px var(--green-glow); }
   .cv-body {
-    max-width: 980px;
+    max-width: 61.25rem;
     margin: 0 auto;
     padding: 2rem 1.25rem 4rem;
   }
@@ -46,10 +47,10 @@
   #pdf-canvas-wrap { display: none; }
   .pdf-page {
     position: relative;
-    background: #1a1c1a;
+    background: var(--pdf-bg);
     border: 1px solid var(--green-dim);
     border-radius: var(--radius);
-    padding: 6px;
+    padding: 0.375rem;
     margin-bottom: 2.5rem;
     box-shadow: 0 0 20px rgba(0, 255, 65, 0.12);
   }
@@ -62,10 +63,10 @@
   .pdf-page-file {
     font-size: 0.625rem;
     color: var(--muted);
-    margin-top: 6px;
+    margin-top: 0.375rem;
     text-align: center;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 48rem) {
     .cv-body { padding-top: 1.5rem; }
     .cv-topbar .hide-sm { display: none; }
   }

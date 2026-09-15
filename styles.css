@@ -32,30 +32,6 @@
   color-scheme: dark;
 }
 
-html[data-theme="light"] {
-  --green: #0a7c33;
-  --green-dim: rgba(10, 124, 51, 0.12);
-  --green-glow: rgba(10, 124, 51, 0.3);
-  --green-ink: #ffffff;
-  --red: #c22;
-  --red-dim: rgba(200, 34, 34, 0.12);
-  --gold: #9a6b00;
-  --gold-dim: rgba(154, 107, 0, 0.1);
-  --gold-border: rgba(154, 107, 0, 0.3);
-  --bg: #f4f4f4;
-  --surface: #ffffff;
-  --card: #eefbf1;
-  --border: #d7dbe0;
-  --text: #161616;
-  --muted: #5a6472;
-  --boot-bg: #000;
-  --boot-text: #c6c6c6;
-  --boot-ok: #00e676;
-  --boot-bright: #eaeaea;
-  --boot-dim: #9a9a9a;
-  color-scheme: light;
-}
-
 *,
 *::before,
 *::after {
@@ -281,9 +257,8 @@ img {
   align-items: center;
   gap: 0.5rem;
 }
-.nav-toggle,
-.theme-toggle {
-  display: flex;
+.nav-toggle {
+  display: none;
   align-items: center;
   justify-content: center;
   background: transparent;
@@ -297,11 +272,7 @@ img {
   height: 40px;
   transition: color 0.2s, border-color 0.2s, box-shadow 0.2s, background 0.2s;
 }
-.nav-toggle {
-  display: none;
-}
-.nav-toggle:hover,
-.theme-toggle:hover {
+.nav-toggle:hover {
   border-color: var(--green);
   box-shadow: 0 0 10px var(--green-glow);
 }
@@ -1002,9 +973,6 @@ a.cert-card:hover {
   }
   .nav-toggle {
     display: flex;
-  }
-  .nav-toggle,
-  .theme-toggle {
     width: 44px;
     height: 44px;
   }
